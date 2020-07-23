@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pepper-job id="lej23hdb" version="1.0">
+	<importer name="TCFImporter" path="./tcf/test.tcf/">
+	</importer>
+	<exporter name="ANNISExporter" path="./annis/">
+	</exporter>
+</pepper-job>

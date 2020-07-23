@@ -747,24 +747,18 @@ public class TCFMapperImport extends PepperMapperImpl {
 				while (p < primaryData.length() && (p - old_p) <= lookAhead && !primaryData.substring(p).startsWith(tok)) {
 					p++;
 				}
-				if(this.ignoreFullText){
+				if (p == primaryData.length() || (p - old_p) > lookAhead) {
+					logger.warn("WARNING: Skipped token [".concat(tok).concat("] (ID=").concat(currentNodeID).concat("), it could not be found in the base text. This might lead to further errors in processing the document."));
+					p = old_p;
+					SToken emptyToken = SaltFactory.createSToken();// we'll need
+																	// that for
+																	// annotations
+					getSDocGraph().addNode(emptyToken);
+					store(currentNodeID, emptyToken);
+					trashList.add(emptyToken);
+				} else {
 					store(currentNodeID, getSDocGraph().createToken(currentSTDS, p, p + tok.length()));
 					p += tok.length();
-				} else {
-					if (p == primaryData.length() || (p - old_p) > lookAhead) {
-						logger.warn("WARNING: Skipped token [".concat(tok).concat("] (ID=").concat(currentNodeID).concat("), it could not be found in the base text. This might lead to further errors in processing the document."));
-						p = old_p;
-						SToken emptyToken = SaltFactory.createSToken();// we'll need
-						// that for
-						// annotations
-						getSDocGraph().addNode(emptyToken);
-						store(currentNodeID, emptyToken);
-						trashList.add(emptyToken);
-					} else {
-						store(currentNodeID, getSDocGraph().createToken(currentSTDS, p, p + tok.length()));
-						p += tok.length();
-					}
-
 				}
 			} else if (TAG_TC_SEGMENT.equals(localName)) {
 				/* build annotation TODO */

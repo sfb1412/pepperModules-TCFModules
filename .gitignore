@@ -1,3 +1,5 @@
+**/*.annis
+**/annis.version
 .idea/
 **/*~
 /target

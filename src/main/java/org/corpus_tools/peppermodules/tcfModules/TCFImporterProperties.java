@@ -63,7 +63,6 @@ public class TCFImporterProperties extends PepperModuleProperties {
 		}
 		return retVal;
 	}
-
 	public boolean isUseCommonAnnotatedElement() {
 		boolean retVal = false;
 		String prop = getProperty(PROP_USE_COMMON_ANNOTATED_ELEMENT).getValue().toString();

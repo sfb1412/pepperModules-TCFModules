@@ -160,7 +160,7 @@ public class TCFMapperImport extends PepperMapperImpl {
 		private boolean ignoreFullText;
 		/**
 		 */
-		private String fullText;
+		private StringBuilder fullText;
 		/**
 		 * is set true as soon as the reader finds a duplicated reference Id and
 		 * then it ignores the Ids.
@@ -185,7 +185,7 @@ public class TCFMapperImport extends PepperMapperImpl {
 			shrinkTokenAnnotations = ((TCFImporterProperties) getProperties()).isShrinkTokenAnnotation();
 			useCommonAnnotatedElement = ((TCFImporterProperties) getProperties()).isUseCommonAnnotatedElement();
 			ignoreFullText = ((TCFImporterProperties) getProperties()).isIgnoreFullText();
-			fullText = new String();
+			fullText = new StringBuilder();
 			ignoreIds = false;
 			id = 0;
 			metaId = 0;

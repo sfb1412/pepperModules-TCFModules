@@ -194,6 +194,7 @@ public class TCFMapperImport extends PepperMapperImpl {
 
 		@Override
 		public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+
 			localName = qName.substring(qName.lastIndexOf(":") + 1);
 			path.push(localName);
 
@@ -743,10 +744,22 @@ public class TCFMapperImport extends PepperMapperImpl {
 				int old_p = p;
 				String primaryData = currentSTDS.getText();
 				String tok = chars.toString();
+
+				if(this.ignoreFullText){
+					if(tok.equalsIgnoreCase(".")){
+						fullText = new StringBuilder(fullText.substring(0,fullText.length()-1));
+					}
+					this.fullText.append(tok);
+					this.fullText.append(" ");
+					currentSTDS.setText(fullText.toString());
+					primaryData = currentSTDS.getText();
+				}
+
 				int lookAhead = (primaryData.substring(p).length() - primaryData.substring(p).trim().length()) + 1;
 				while (p < primaryData.length() && (p - old_p) <= lookAhead && !primaryData.substring(p).startsWith(tok)) {
 					p++;
 				}
+
 				if (p == primaryData.length() || (p - old_p) > lookAhead) {
 					logger.warn("WARNING: Skipped token [".concat(tok).concat("] (ID=").concat(currentNodeID).concat("), it could not be found in the base text. This might lead to further errors in processing the document."));
 					p = old_p;
@@ -1015,6 +1028,7 @@ public class TCFMapperImport extends PepperMapperImpl {
 			}
 			return false;
 		}
+
 	}
 
 }

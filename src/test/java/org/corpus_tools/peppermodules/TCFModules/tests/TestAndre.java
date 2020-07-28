@@ -7,15 +7,14 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 
-
 /**
  * This class fixes broken TCF documents where the <text> tag does not match the sum of the <tc:token> tags.
  */
+
 public class TestAndre {
 
 
-
-    public static  void main(String[] args){
+    public static void main(String[] args){
         String root = "/home/andre/IdeaProjects/David/files/";
         File f = new File(root);
         processDirectory(f);
@@ -33,7 +32,7 @@ public class TestAndre {
                  }
              }
         } catch(Exception e){
-
+            e.printStackTrace();
         }
     }
 
@@ -69,9 +68,7 @@ public class TestAndre {
 
 
         } catch(Exception e){
-            e.getStackTrace();
+            e.printStackTrace();
         }
-
-
     }
 }

@@ -745,6 +745,12 @@ public class TCFMapperImport extends PepperMapperImpl {
 				String primaryData = currentSTDS.getText();
 				String tok = chars.toString();
 
+				/**
+				 * Implementation of the ignoreFullText-Feature. <text></text> is ignored and replaced by
+				 * the sum of the tc:target tags. In case of a dot (.) the whitespace after the last tag is removed
+				 *
+				 */
+
 				if(this.ignoreFullText){
 					if(tok.equalsIgnoreCase(".")){
 						fullText = new StringBuilder(fullText.substring(0,fullText.length()-1));

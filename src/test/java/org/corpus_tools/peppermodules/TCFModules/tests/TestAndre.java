@@ -8,7 +8,8 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 
 /**
- * This class fixes broken TCF documents where the <text> tag does not match the sum of the <tc:token> tags.
+ * This class fixes broken TCF documents where the <text> tag does not
+ * match the sum of the <tc:token> tags.
  */
 
 public class TestAndre {

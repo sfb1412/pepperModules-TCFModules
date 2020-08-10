@@ -747,7 +747,7 @@ public class TCFMapperImport extends PepperMapperImpl {
 
 				/**
 				 * Implementation of the ignoreFullText-Feature. <text></text> is ignored and replaced by
-				 * the sum of the tc:target tags. In case of a dot (.) the whitespace after the last tag is removed
+				 * the sum of the <tc:target></tc:target> tags. In case of a dot (.) the whitespace after the last tag is removed
 				 *
 				 */
 
@@ -760,6 +760,10 @@ public class TCFMapperImport extends PepperMapperImpl {
 					currentSTDS.setText(fullText.toString());
 					primaryData = currentSTDS.getText();
 				}
+
+				/**
+				 * endof ignoreFullText-Feature
+				 */
 
 				int lookAhead = (primaryData.substring(p).length() - primaryData.substring(p).trim().length()) + 1;
 				while (p < primaryData.length() && (p - old_p) <= lookAhead && !primaryData.substring(p).startsWith(tok)) {
@@ -1024,6 +1028,7 @@ public class TCFMapperImport extends PepperMapperImpl {
 		 * @param sTarget
 		 * @return true, if the {@link SPointingRelation} exists.
 		 */
+
 		private boolean referenceExists(SNode sSource, SNode sTarget) {
 			for (SRelation sRel : sSource.getOutRelations()) {
 				if (sRel instanceof SPointingRelation) {
